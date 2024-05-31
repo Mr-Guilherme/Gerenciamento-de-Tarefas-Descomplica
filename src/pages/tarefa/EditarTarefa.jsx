@@ -6,13 +6,11 @@ import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 
 //Declaração do componente EditarTarefa, recebendo como props, do Componente ListarTarefa, os states handCloseEditar,
 // idTarefaSelecionada, tarefas, tarefa e setTarefas
 const EditarTarefa = ({handleCloseEditar, idTarefaSelecionada, tarefas, tarefa, setTarefas}) =>{
-  const [idTarefa, setIdTarefa] = useState();
   const [tituloTarefa, setTituloTarefa] = useState('');
   const [descricaoTarefa, setDescricaoTarefa] = useState('');
   const [inicioTarefa, setInicioTarefa] = useState('');
@@ -24,14 +22,13 @@ const EditarTarefa = ({handleCloseEditar, idTarefaSelecionada, tarefas, tarefa, 
   //  recebido como props do componente ListarTarefa.
   useEffect(() => {
     //console.log('Tarefa selecionada: ' + JSON.stringify(tarefa));
-    setIdTarefa(idTarefaSelecionada);
     setTituloTarefa(tarefa.tituloTarefa);
     setDescricaoTarefa(tarefa.descricaoTarefa);
     setInicioTarefa(tarefa.inicioTarefa);
     setFimTarefa(tarefa.fimTarefa);
     setRecursoTarefa(tarefa.recursoTarefa);
     setStatusTarefa(tarefa.statusTarefa);
-  },[]);
+  },[tarefa]);
 
   const handleRecurso = (event) => {
     setRecursoTarefa(event.target.value);

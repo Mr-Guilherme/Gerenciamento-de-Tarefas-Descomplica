@@ -14,19 +14,20 @@ import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Modal from '@mui/material/Modal';
+import Chip from '@mui/material/Chip';
 
 import CriarTarefa from './CriarTarefa';
 import EditarTarefa from './EditarTarefa';
 
 //A função abaixo é usada para criar o array contendo os dados iniciais da listagem de tarefas.
 function createData(
-  idTarefa: number,
-  tituloTarefa: string,
-  descricaoTarefa: string,
-  inicioTarefa: string,
-  fimTarefa: string,
-  statusTarefa: string,
-  recursoTarefa: string,
+  idTarefa,
+  tituloTarefa,
+  descricaoTarefa,
+  inicioTarefa,
+  fimTarefa,
+  statusTarefa,
+  recursoTarefa,
 ) {
   return { idTarefa, tituloTarefa, descricaoTarefa, inicioTarefa, fimTarefa, statusTarefa, recursoTarefa };
 }
@@ -50,7 +51,6 @@ const ListarTarefa = () => {
   const [idTarefaSelecionada, setIdTarefaSelecionada] = useState([]);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const handleOpenEditar = () => setOpenEditar(true);
   const handleCloseEditar = () => setOpenEditar(false);
 
   //O array definido acima é setado como conteúdo do state Tarefas na renderização inicial do componente.
@@ -119,7 +119,11 @@ const ListarTarefa = () => {
                       <TableCell align="right">{row.descricaoTarefa}</TableCell>
                       <TableCell align="right">{row.inicioTarefa}</TableCell>
                       <TableCell align="right">{row.fimTarefa}</TableCell>
-                      <TableCell align="right">{row.statusTarefa}</TableCell>
+                      <TableCell align="right">
+                        {row.statusTarefa === 'Concluída' && <Chip label="Concluída" color="success" />}
+                        {row.statusTarefa === 'Em Andamento' && <Chip label="Em Andamento" color="primary" />}
+                        {row.statusTarefa === 'Aguardando' && <Chip label="Aguardando" color="warning" />}
+                      </TableCell>
                       <TableCell align="right">{row.recursoTarefa}</TableCell>
                       <TableCell align="center">
                         <Button variant="contained" color="success" onClick={() => handleEditar(row.idTarefa)}><EditIcon fontSize="small" /></Button>            
@@ -135,7 +139,6 @@ const ListarTarefa = () => {
         </CardContent>
         <CardActions>
             <Button size="small" variant="contained" onClick={handleOpen}>Criar Tarefa</Button>
-            <Button size="small" variant="outlined">Cancelar</Button>
       </CardActions> 
     </Card>
     <div>
